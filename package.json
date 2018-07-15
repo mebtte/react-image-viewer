@@ -1,10 +1,11 @@
 {
-  "name": "@ssz/react-image-viewer",
+  "name": "@mebtte/react-image-viewer",
   "version": "0.1.0",
   "description": "React Component that view a image.",
   "main": "ImageViewer.js",
   "module": "src/ImageViewer.js",
   "scripts": {
+    "publish": "npm publish --access=publish",
     "build": "webpack --config webpack/production.js",
     "storybook": "start-storybook -p 9001 -c storybook",
     "storybook:build": "build-storybook -c storybook -o ./example"
@@ -50,5 +51,8 @@
   },
   "pre-commit": [
     "build"
-  ]
+  ],
+  "directories": {
+    "example": "example"
+  }
 }

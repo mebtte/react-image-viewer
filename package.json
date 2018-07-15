@@ -5,7 +5,6 @@
   "main": "ImageViewer.js",
   "module": "src/ImageViewer.js",
   "scripts": {
-    "publish": "npm publish --access=publish",
     "build": "webpack --config webpack/production.js",
     "storybook": "start-storybook -p 9001 -c storybook",
     "storybook:build": "build-storybook -c storybook -o ./example"

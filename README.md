@@ -11,7 +11,7 @@ React Component that view a image.
 npm install --save react react-dom prop-types styled-components
 ```
 ```bash
-npm install -S @ssz/react-image-viewer
+npm install -S @mebtte/react-image-viewer
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ npm install -S @ssz/react-image-viewer
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ImageViewer from '@ssz/react-image-viewer';
+import ImageViewer from '@mebtte/react-image-viewer';
 
 class Demo extends React.Component {
   constructor(props) {
@@ -59,7 +59,7 @@ ReactDOM.render(<Demo />, moundNode);
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ImageViewer from '@ssz/react-image-viewer';
+import ImageViewer from '@mebtte/react-image-viewer';
 
 const src = 'https://mebtte.com/resource/wallpaper';
 

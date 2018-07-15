@@ -1,7 +1,9 @@
+const path = require('path');
+
 module.exports = {
   entry: './src/ImageViewer.js',
   output: {
-    path: __dirname,
+    path: path.join(__dirname, '..'),
     filename: 'ImageViewer.js',
     library: '',
     libraryTarget: 'commonjs',

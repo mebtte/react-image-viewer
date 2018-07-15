@@ -3,6 +3,8 @@ React Component that view a image.
 
 ![](./example/screenshot.png)
 
+## [example](https://mebtte.github.io/react-image-viewer/example)
+
 ## Install
 ```bash
 # ImageViewer requirement

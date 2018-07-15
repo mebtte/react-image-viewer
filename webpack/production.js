@@ -1,0 +1,8 @@
+const nodeExternals = require('webpack-node-externals');
+
+const base = require('./base');
+
+module.exports = Object.assign({}, base, {
+  mode: 'production',
+  externals: [nodeExternals()],
+});

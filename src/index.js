@@ -8,7 +8,12 @@ import ImageBox from './ImageBox';
 import Close from './Close';
 import Toolbar from './Toolbar';
 
-import { ANIMATION_TIME, LOAD_STATUS, STEP_WIDTH, WHEEL_INTERVAL, MIN_WIDTH } from './constant';
+import {
+  LOAD_STATUS,
+  STEP_WIDTH,
+  WHEEL_INTERVAL,
+  MIN_WIDTH,
+} from './constant';
 import view from './view';
 
 /**
@@ -16,6 +21,8 @@ import view from './view';
  * @author Mebtte
  */
 class ImageViewer extends React.Component {
+  static view = view
+
   static propTypes = {
     /** the url of image, if `null`, the component do nothing. */
     src: Types.string.isRequired,
@@ -29,8 +36,6 @@ class ImageViewer extends React.Component {
     super(props);
     this.state = this.getInitialState(props);
   }
-
-  static view = view
 
   getInitialState = props => ({
     src: props.src,
@@ -46,16 +51,15 @@ class ImageViewer extends React.Component {
   })
 
   componentDidMount() {
-    if (this.props.open) {
-      this.loadImage(this.props.src);
+    const { open, src } = this.props;
+    if (open) {
+      this.loadImage(src);
     }
   }
 
   componentWillReceiveProps(next) {
-    if (
-      (next.open && !this.props.open)
-      || next.src !== this.props.src
-     ) {
+    const { open, src } = this.props;
+    if ((next.open && !open) || next.src !== src) {
       this.loadImage(next.src);
     }
   }
@@ -122,22 +126,15 @@ class ImageViewer extends React.Component {
     this.setState({ rotate: rotate + 90 });
   }
 
-  onTransitionEnd = () => {
-    const { open } = this.props;
-    if (!open) {
-      console.log('exited');
-    }
-  }
-
   loadImage = (src) => {
     this.setState({ loadImageStatus: LOAD_STATUS.LOADING });
-    const image = new Image();
+    const image = new window.Image();
     image.src = src;
     image.onload = () => {
       const { width, height } = this.root.getBoundingClientRect();
       const { naturalWidth, naturalHeight } = image;
-      let left = (width - naturalWidth) / 2;
-      let top = (height - naturalHeight) / 2;
+      const left = (width - naturalWidth) / 2;
+      const top = (height - naturalHeight) / 2;
       let scale = 1;
       let auturalWidth = naturalWidth;
       let auturalHeight = naturalHeight;
@@ -153,7 +150,7 @@ class ImageViewer extends React.Component {
       }
       this.setState({
         loadImageStatus: LOAD_STATUS.LOADED,
-        naturalHeight,
+        naturalHeight, // eslint-disable-line
         naturalWidth,
         top,
         left,
@@ -222,7 +219,6 @@ class ImageViewer extends React.Component {
         position="fixed"
         visible
         innerRef={root => this.root = root}
-        onTransitionEnd={this.onTransitionEnd}
       >
         {this.renderContent(loadImageStatus, open)}
         <Close onClose={onClose} />

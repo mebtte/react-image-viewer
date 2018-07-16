@@ -11,6 +11,7 @@ module.exports = {
     'react/no-multi-comp': 0,
   },
   globals: {
+    window: true,
     document: true,
   },
 };

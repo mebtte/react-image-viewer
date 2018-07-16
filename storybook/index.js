@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 // import { action } from '@storybook/addon-actions';
 
-import ImageViewer from '../src/ImageViewer';
+import ImageViewer from '../src/index.js';
 
 const src = 'https://mebtte.com/resource/wallpaper';
 

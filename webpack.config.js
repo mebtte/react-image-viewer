@@ -1,12 +1,12 @@
-const path = require('path');
+const externals = require('webpack-node-externals');
 
 module.exports = {
-  entry: './src/ImageViewer.js',
+  mode: 'production',
+  entry: './src/index.js',
   output: {
-    path: path.join(__dirname, '..'),
-    filename: 'ImageViewer.js',
-    library: '',
-    libraryTarget: 'commonjs',
+    path: __dirname,
+    filename: 'index.js',
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
@@ -20,4 +20,5 @@ module.exports = {
       },
     ],
   },
+  externals: externals(),
 };

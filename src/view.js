@@ -2,7 +2,7 @@ import React from 'react';
 import Types from 'prop-types';
 import ReactDOM from 'react-dom';
 
-import ImageViewer from './ImageViewer'; // eslint-disable-line
+import ImageViewer from './index'; // eslint-disable-line
 
 import { ANIMATION_TIME } from './constant';
 

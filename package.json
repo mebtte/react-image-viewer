@@ -2,10 +2,9 @@
   "name": "@mebtte/react-image-viewer",
   "version": "0.1.2",
   "description": "React Component that view a image.",
-  "main": "ImageViewer.js",
-  "module": "src/ImageViewer.js",
+  "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack/production.js",
+    "build": "webpack --config webpack.config.js",
     "storybook": "start-storybook -p 9001 -c storybook",
     "storybook:build": "build-storybook -c storybook -o ./example"
   },
@@ -33,6 +32,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",
     "babel-loader": "^7.1.5",
+    "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
@@ -42,16 +42,9 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.0",
     "eslint-plugin-react": "^7.10.0",
-    "pre-commit": "^1.2.2",
     "url-loader": "^1.0.1",
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
     "webpack-node-externals": "^1.7.2"
-  },
-  "pre-commit": [
-    "build"
-  ],
-  "directories": {
-    "example": "example"
   }
 }

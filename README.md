@@ -8,7 +8,7 @@ React Component that view a image.
 ## Install
 ```bash
 # ImageViewer requirement
-npm install --save react react-dom prop-types styled-components
+npm install --save react react-dom prop-types
 ```
 ```bash
 npm install -S @mebtte/react-image-viewer

@@ -1,5 +1,3 @@
-const externals = require('webpack-node-externals');
-
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
@@ -20,5 +18,9 @@ module.exports = {
       },
     ],
   },
-  externals: externals(),
+  externals: {
+    react: 'commonjs react',
+    'react-dom': 'commonjs react-dom',
+    'prop-types': 'commonjs prop-types',
+  },
 };

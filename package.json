@@ -1,6 +1,6 @@
 {
   "name": "@mebtte/react-image-viewer",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "React Component that view a image.",
   "main": "index.js",
   "scripts": {

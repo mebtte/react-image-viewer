@@ -4,7 +4,7 @@ import Types from 'prop-types';
 import Aux from 'react-aux';
 
 import style from './index.css';
-import { LOAD_STATUS, WIDTH_STEP, MIN_SCLAE } from './constant';
+import { LOAD_STATUS, WIDTH_STEP, MIN_SCLAE, TRANSITION_TIME } from './constant';
 import view from './util/view';
 
 import CloseButton from './component/CloseButton';
@@ -89,6 +89,22 @@ class ImageViewer extends React.Component {
     this.lastY = clientY;
   }
 
+  onWheel = (event) => {
+    event.preventDefault();
+    const now = Date.now();
+    const { lastWheelTime } = this;
+    if (lastWheelTime && now - lastWheelTime <= TRANSITION_TIME) {
+      return;
+    }
+    const { deltaY } = event;
+    if (deltaY > 0) {
+      this.onEnlarge();
+    } else if (deltaY < 0) {
+      this.onShrink();
+    }
+    this.lastWheelTime = now;
+  }
+
   onEnlarge = () => {
     const { naturalWidth, scale } = this.state;
     const width = naturalWidth * scale + WIDTH_STEP;
@@ -158,6 +174,7 @@ class ImageViewer extends React.Component {
             onMouseDown={this.onMouseDown}
             onMouseUp={this.onMouseUp}
             onMouseMove={this.onMouseMove}
+            onWheel={this.onWheel}
           />
           <Toolbar
             onEnlarge={this.onEnlarge}

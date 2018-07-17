@@ -8,6 +8,7 @@ import { TRANSITION_TIME } from '../constant';
 class Wrapper extends React.Component {
   static propTypes = {
     src: Types.string.isRequired,
+    zIndex: Types.number.isRequired,
     onExited: Types.func.isRequired,
   }
 
@@ -30,24 +31,26 @@ class Wrapper extends React.Component {
 
   render() {
     const { open } = this.state;
-    const { src } = this.props;
+    const { src, zIndex } = this.props;
     return (
       <ImageViewer
         open={open}
         src={src}
+        zIndex={zIndex}
         onClose={this.onClose}
       />
     );
   }
 }
 
-function view(src) {
+function view(src, zIndex = 3333) {
   const dom = document.createElement('div');
   document.body.appendChild(dom);
   const onExited = () => dom.remove();
   ReactDOM.render((
     <Wrapper
       src={src}
+      zIndex={zIndex}
       onExited={onExited}
     />
   ), dom);

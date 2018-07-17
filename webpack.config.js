@@ -13,10 +13,6 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        test: /\.svg$/,
-        use: 'url-loader',
-      },
-      {
         test: /\.css$/,
         use: [
           'style-loader',

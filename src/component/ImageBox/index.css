@@ -3,5 +3,7 @@
 }
 
 :local(.img){
+  user-select: none;
+  user-drag: none;
   transition: all .3s;
 }

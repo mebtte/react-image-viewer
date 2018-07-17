@@ -3,7 +3,7 @@ import Types from 'prop-types';
 
 import style from './index.css';
 
-import Icon from '../Icon';
+import Icon from '../SvgIcon';
 
 const LoadError = ({ reload }) => (
   <div className={style.base}>

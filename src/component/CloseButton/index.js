@@ -3,14 +3,14 @@ import Types from 'prop-types';
 
 import style from './index.css';
 
-import Icon from '../Icon';
+import Icon from '../SvgIcon';
 
 const CloseButton = ({ onClose }) => (
   <button
     className={style.base}
     onClick={onClose}
   >
-    <Icon name="close" className={style.icon} />
+    <Icon name="close" size={32} className={style.icon} />
   </button>
 );
 CloseButton.propTypes = {

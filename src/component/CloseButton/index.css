@@ -1,11 +1,11 @@
 :local(.base){
   position: absolute;
-  top: -50px;
-  right: -50px;
+  top: -60px;
+  right: -60px;
   border: none;
   outline: none;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   cursor: pointer;
   transition: all .3s;
@@ -23,7 +23,7 @@
 
 :local(.icon){
   position: absolute;
-  top: 55px;
-  right: 55px;
+  top: 68px;
+  right: 65px;
   transition: all .3s;
 }

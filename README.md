@@ -1,9 +1,7 @@
 # react-image-viewer
-React Component that view a image.
+React Component that view a image. [See it online](https://mebtte.github.io/react-image-viewer/example).
 
 ![](./example/screenshot.png)
-
-## [example](https://mebtte.github.io/react-image-viewer/example)
 
 ## Install
 ```bash
@@ -55,6 +53,12 @@ class Demo extends React.Component {
 ReactDOM.render(<Demo />, moundNode);
 ```
 ### As Function
+#### view(src, [zIndex = 3333]) => Void
+> Use it as a function to view a image.
+* params
+> `src (String)`: The src of image.  
+> `[zIndex] (Number)`: The css `z-index`, default `3333`.
+* example
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -81,7 +85,7 @@ ReactDOM.render(<Demo />, moundNode);
 ## Props
 | name | type | required | default | description |
 | --- | --- | --- | --- | --- |
-| open | Boolean | true | | Visibility of `ImageViewer`. |
+| open | Boolean | true | | Visibility. |
 | src | String | true | | The src of image. |
 | onClose | Function | true | | The close event handler. |
-| zIndex | Number | false | 3333 | The z-index css of `ImageViewer`. |
+| zIndex | Number | false | 3333 | The z-index css. |

@@ -1,18 +1,11 @@
 export const LOAD_STATUS = {
-  LOADING: 0,
-  LOADED: 1,
-  ERROR: 0,
+  LOADING: 1,
+  LOADED: 2,
+  ERROR: 3,
 };
 
-export const LOAD_STATUS_TEXT = {
-  ERROR: 'failed to load image.',
-  LOADING: 'loading...',
-  RELOAD: 'reload',
-};
+export const TRANSITION_TIME = 300; // time of transition
 
-export const ANIMATION_TIME = 1000 * 0.5; // animation time
+export const WIDTH_STEP = 50; // the change of width on every step
 
-export const MIN_WIDTH = 100;
-export const STEP_WIDTH = 100;
-
-export const WHEEL_INTERVAL = 500;
+export const MIN_SCLAE = 0.05; // the min scale of image

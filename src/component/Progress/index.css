@@ -1,0 +1,15 @@
+@keyframes react-image-loader-progress{
+  0% {
+    transform: rotate(0);
+  } 100% {
+    transform: rotate(360deg);
+  }
+}
+
+:local(.base){
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: react-image-loader-progress 1s linear infinite;
+}

@@ -1,66 +1,66 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Types from 'prop-types';
 
-import Mask from './Mask';
-import Error from './Error';
-import Loading from './Loading';
-import ImageBox from './ImageBox';
-import Close from './Close';
-import Toolbar from './Toolbar';
+import Aux from 'react-aux';
 
-import {
-  LOAD_STATUS,
-  STEP_WIDTH,
-  WHEEL_INTERVAL,
-  MIN_WIDTH,
-} from './constant';
-import view from './view';
+import style from './index.css';
+import { LOAD_STATUS, WIDTH_STEP, MIN_SCLAE } from './constant';
+import view from './util/view';
 
-/**
- * The component that view a image.
- * @author Mebtte
- */
+import CloseButton from './component/CloseButton';
+import LoadError from './component/LoadError';
+import Progress from './component/Progress';
+import ImageBox from './component/ImageBox';
+import Mask from './component/Mask';
+import Toolbar from './component/Toolbar';
+
 class ImageViewer extends React.Component {
-  static view = view
-
   static propTypes = {
-    /** the url of image, if `null`, the component do nothing. */
-    src: Types.string.isRequired,
-    /** visibility of viewer. */
+    /** Visibility of `ImageViewer`. */
     open: Types.bool.isRequired,
-    /** the close event handler */
+    /** The src of image. */
+    src: Types.string.isRequired,
+    /** The close event handler. */
     onClose: Types.func.isRequired,
+    /** The z-index css of `ImageViewer`. */
+    zIndex: Types.number,
   }
+
+  static defaultProps = {
+    zIndex: 3333,
+  }
+
+  static view = view
 
   constructor(props) {
     super(props);
-    this.state = this.getInitialState(props);
+    this.state = this.getInitialState();
   }
 
-  getInitialState = props => ({
-    src: props.src,
+  getInitialState = () => {
+    return {
+      loadImageStatus: LOAD_STATUS.LOADING, // the status of loading image
+      left: 0,
+      top: 0,
+      rotate: 0,
+      scale: 1,
+      naturalHeight: 0,
+      naturalWidth: 0,
+    };
+  }
 
-    loadImageStatus: LOAD_STATUS.LOADING, // the status of image
-
-    left: 0,
-    top: 0,
-    scale: 1, // the scale of image
-    rotate: 0, // the rotation of image
-    naturalWidth: 0,
-    naturalHeight: 0,
-  })
-
-  componentDidMount() {
-    const { open, src } = this.props;
-    if (open) {
-      this.loadImage(src);
+  componentDidMount(){
+    if (this.props.open) {
+      this.loadImage();
     }
   }
 
   componentWillReceiveProps(next) {
-    const { open, src } = this.props;
-    if ((next.open && !open) || next.src !== src) {
-      this.loadImage(next.src);
+    if (next.open && !this.props.open) {
+      this.loadImage();
+    }
+    if (next.src !== this.props.src) {
+      this.setState(this.getInitialState());
     }
   }
 
@@ -77,100 +77,76 @@ class ImageViewer extends React.Component {
     if (!this.mouseDown) {
       return;
     }
-    const { lastX, lastY } = this;
     const { clientX, clientY } = event;
-    const { left, top } = this.state;
-    const offsetX = clientX - lastX;
-    const offsetY = clientY - lastY;
+    const { top, left } = this.state;
+    const offsetX = clientX - this.lastX;
+    const offsetY = clientY - this.lastY;
     this.setState({
-      left: left + offsetX,
       top: top + offsetY,
+      left: left + offsetX,
     });
     this.lastX = clientX;
     this.lastY = clientY;
   }
 
-  onWheel = (event) => {
-    event.preventDefault();
-    const now = new Date();
-    if (this.lastWheelTime && now - this.lastWheelTime < WHEEL_INTERVAL) {
-      return;
-    }
-    const { deltaY } = event;
-    if (deltaY > 0) {
-      this.onEnlarge();
-    } else if (deltaY < 0) {
-      this.onShrink();
-    }
-    this.lastWheelTime = now;
-  }
-
   onEnlarge = () => {
-    let { scale } = this.state;
-    const { naturalWidth } = this.state;
-    scale = (naturalWidth * scale + STEP_WIDTH) / naturalWidth;
-    this.setState({ scale });
+    const { naturalWidth, scale } = this.state;
+    const width = naturalWidth * scale + WIDTH_STEP;
+    this.setState({ scale: width / naturalWidth });
   }
 
   onShrink = () => {
-    let { scale } = this.state;
-    const { naturalWidth } = this.state;
-    let width = naturalWidth * scale - STEP_WIDTH;
-    width = width < MIN_WIDTH ? MIN_WIDTH : width;
-    scale = width / naturalWidth;
-    this.setState({ scale: scale < 0.2 ? 0.2 : scale });
+    const { naturalWidth, scale } = this.state;
+    const width = naturalWidth * scale - WIDTH_STEP;
+    const _scale = width / naturalWidth;
+    this.setState({ scale: _scale < MIN_SCLAE ? MIN_SCLAE : _scale });
   }
 
-  onRotate = () => {
-    const { rotate } = this.state;
-    this.setState({ rotate: rotate + 90 });
-  }
+  onRotate = () => this.setState({ rotate: this.state.rotate + 90 })
 
-  loadImage = (src) => {
+  /* load image */
+  loadImage = () => {
+    const { src } = this.props;
     this.setState({ loadImageStatus: LOAD_STATUS.LOADING });
     const image = new window.Image();
     image.src = src;
     image.onload = () => {
-      const { width, height } = this.root.getBoundingClientRect();
       const { naturalWidth, naturalHeight } = image;
+      const { width, height } = this.root.getBoundingClientRect();
       const left = (width - naturalWidth) / 2;
       const top = (height - naturalHeight) / 2;
       let scale = 1;
-      let auturalWidth = naturalWidth;
-      let auturalHeight = naturalHeight;
-      if (auturalWidth > width) {
-        auturalWidth = width;
-        scale = auturalWidth / naturalWidth;
-        auturalHeight = naturalHeight * scale;
+      let acturalWidth = naturalWidth;
+      let acturalHeight = naturalHeight;
+      if (acturalWidth > width) {
+        acturalWidth = width;
+        scale = acturalWidth / naturalWidth;
+        acturalHeight = naturalHeight * scale;
       }
-      if (auturalHeight > height) {
-        auturalHeight = height;
-        scale = auturalHeight / naturalHeight;
-        auturalWidth = naturalWidth * scale;
+      if (acturalHeight > height) {
+        acturalHeight = height;
+        scale = acturalHeight / naturalHeight;
+        acturalWidth = naturalWidth * scale;
       }
       this.setState({
-        loadImageStatus: LOAD_STATUS.LOADED,
-        naturalHeight, // eslint-disable-line
-        naturalWidth,
-        top,
         left,
+        top,
+        loadImageStatus: LOAD_STATUS.LOADED,
+        naturalHeight,
+        naturalWidth,
         scale,
       });
     };
     image.onerror = () => this.setState({ loadImageStatus: LOAD_STATUS.ERROR });
   }
 
-  renderContent = (status, open) => {
-    const { src } = this.props;
+  renderContent = () => {
+    const { loadImageStatus: status } = this.state;
     if (status === LOAD_STATUS.LOADED) {
-      const {
-        left,
-        top,
-        rotate,
-        scale,
-      } = this.state;
+      const { src } = this.props;
+      const { left, top, rotate, scale } = this.state;
       return (
-        <Fragment>
+        <Aux>
           <ImageBox
             src={src}
             left={left}
@@ -179,50 +155,39 @@ class ImageViewer extends React.Component {
             scale={scale}
           />
           <Mask
-            open={open}
-            position="absolute"
             onMouseDown={this.onMouseDown}
             onMouseUp={this.onMouseUp}
             onMouseMove={this.onMouseMove}
-            onWheel={this.onWheel}
           />
           <Toolbar
             onEnlarge={this.onEnlarge}
             onShrink={this.onShrink}
             onRotate={this.onRotate}
           />
-        </Fragment>
+        </Aux>
       );
     }
-
     if (status === LOAD_STATUS.LOADING) {
       return (
-        <Loading />
+        <Progress />
       );
     }
-
-    /* error */
     return (
-      <Error reload={() => this.loadImage(src)} />
+      <LoadError reload={this.loadImage} />
     );
   }
 
   render() {
-    const { src, open, onClose } = this.props;
-    if (!src) {
-      return null;
-    }
-    const { loadImageStatus } = this.state;
+    const { open, zIndex, onClose } = this.props;
     return (
-      <Mask
-        open={open}
-        position="fixed"
-        visible
-        innerRef={root => this.root = root}
+      <div
+        className={`${style.base} ${open ? style.open : style.close}`}
+        style={{ zIndex }}
+        ref={root => this.root = root}
       >
-        {this.renderContent(loadImageStatus, open)}
-        <Close onClose={onClose} />
-      </Mask>
+        {this.renderContent()}
+        <CloseButton onClose={onClose} />
+      </div>
     );
   }
 }

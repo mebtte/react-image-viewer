@@ -1,0 +1,29 @@
+:local(.base){
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  border: none;
+  outline: none;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all .3s;
+  background-color: rgba(0, 0, 0, .54);
+}
+
+:local(.base):hover{
+  background-color: rgba(0, 0, 0, .7);
+}
+
+:local(.base):active > :local(.icon){
+  transform: scale(1.2);
+}
+
+
+:local(.icon){
+  position: absolute;
+  top: 55px;
+  right: 55px;
+  transition: all .3s;
+}

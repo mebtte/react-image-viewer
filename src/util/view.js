@@ -2,11 +2,10 @@ import React from 'react';
 import Types from 'prop-types';
 import ReactDOM from 'react-dom';
 
-import ImageViewer from './index'; // eslint-disable-line
+import ImageViewer from '../index'; // eslint-disable-line
+import { TRANSITION_TIME } from '../constant';
 
-import { ANIMATION_TIME } from './constant';
-
-class Container extends React.Component {
+class Wrapper extends React.Component {
   static propTypes = {
     src: Types.string.isRequired,
     onExited: Types.func.isRequired,
@@ -25,18 +24,18 @@ class Container extends React.Component {
 
   onClose = () => {
     const { onExited } = this.props;
-    this.setState({ open: false }, () => setTimeout(onExited, ANIMATION_TIME));
+    this.setState({ open: false });
+    setTimeout(onExited, TRANSITION_TIME);
   }
 
   render() {
     const { open } = this.state;
-    const { src, onExited } = this.props;
+    const { src } = this.props;
     return (
       <ImageViewer
         open={open}
         src={src}
         onClose={this.onClose}
-        onExited={onExited}
       />
     );
   }
@@ -44,10 +43,10 @@ class Container extends React.Component {
 
 function view(src) {
   const dom = document.createElement('div');
-  const onExited = () => dom.remove();
   document.body.appendChild(dom);
+  const onExited = () => dom.remove();
   ReactDOM.render((
-    <Container
+    <Wrapper
       src={src}
       onExited={onExited}
     />

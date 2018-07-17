@@ -1,0 +1,23 @@
+:local(.base) {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5%;
+  background-color: rgba(0, 0, 0, .54);
+  padding: 5px 20px;
+  border-radius: 30px;
+}
+
+:local(.icon) {
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+:local(.icon):hover {
+  transform: scale(1.1);
+}
+
+:local(.icon):active {
+  transform: scale(1.2);
+}

@@ -1,0 +1,12 @@
+:local(.box){
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+}
+
+:local(.icon){
+  width: 100%;
+  user-select: none;
+  user-drag: none;
+}

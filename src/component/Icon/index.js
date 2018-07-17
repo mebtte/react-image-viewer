@@ -1,6 +1,7 @@
 import React from 'react';
 import Types from 'prop-types';
-import styled from 'styled-components';
+
+import style from './index.css';
 
 import SvgClose from './close.svg';
 import SvgLoading from './loading.svg';
@@ -20,38 +21,35 @@ const NAME_MAP_SVG = {
   drag: SvgDrag,
 };
 
-const Style = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3px;
-  ${({ size }) => `
-    width: ${size}px;
-    height: ${size}px;
-  `}
-  >.icon{
-    width: 100%;
-    user-select: none;
-    user-drag: none;
-  }
-`;
-
 class Icon extends React.PureComponent {
   static propTypes = {
     name: Types.oneOf(Object.keys(NAME_MAP_SVG)).isRequired,
     size: Types.number,
+    className: Types.string,
   }
 
   static defaultProps = {
     size: 24,
+    className: '',
   }
 
   render() {
-    const { name, size, ...props } = this.props;
+    const { name, size, className, ...props } = this.props;
     return (
-      <Style size={size} {...props}>
-        <img className="icon" src={NAME_MAP_SVG[name]} alt={`icon ${name}`} />
-      </Style>
+      <div
+        className={`${style.box} ${className}`}
+        style={{
+          width: size,
+          height: size,
+        }}
+        {...props}
+      >
+        <img
+          className={style.icon}
+          src={NAME_MAP_SVG[name]}
+          alt={`icon ${name}`}
+        />
+      </div>
     );
   }
 }

@@ -79,8 +79,9 @@ ReactDOM.render(<Demo />, moundNode);
 ```
 
 ## Props
-| name | type | required  | description |
-| --- | --- | --- | --- |
-| open | Boolean | true | The visibility of `ImageViewer`. |
-| src | String | true | The src of image. |
-| onClose | Function | true | The close event handler. |
+| name | type | required | default | description |
+| --- | --- | --- | --- | --- |
+| open | Boolean | true | | Visibility of `ImageViewer`. |
+| src | String | true | | The src of image. |
+| onClose | Function | true | | The close event handler. |
+| zIndex | Number | false | 3333 | The z-index css of `ImageViewer`. |

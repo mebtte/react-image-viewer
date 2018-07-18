@@ -2,8 +2,8 @@ import React from 'react';
 import Types from 'prop-types';
 import ReactDOM from 'react-dom';
 
-import ImageViewer from '../index'; // eslint-disable-line
-import { TRANSITION_TIME } from '../constant';
+import ImageViewer from './index';
+import { TRANSITION_TIME } from './constant';
 
 class Wrapper extends React.Component {
   static propTypes = {

@@ -1,9 +1,12 @@
 module.exports = {
   mode: 'production',
-  entry: './src/index.js',
+  entry: {
+    ImageViewer: './src/index.js',
+    view: './src/view.js',
+  },
   output: {
     path: __dirname,
-    filename: 'index.js',
+    filename: '[name].js',
     libraryTarget: 'commonjs2',
   },
   module: {

@@ -6,17 +6,16 @@ React Component that view a image. [See it online](https://mebtte.github.io/rea
 ## Install
 ```bash
 # ImageViewer requirement
-npm install --save react react-dom prop-types
+npm install --save react prop-types
 ```
 ```bash
-npm install -S @mebtte/react-image-viewer
+npm install --save @mebtte/react-image-viewer
 ```
 
 ## Usage
 ### As Component
 ```js
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import ImageViewer from '@mebtte/react-image-viewer';
 
@@ -50,8 +49,9 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, moundNode);
+export default Demo;
 ```
+
 ### As Function
 #### view(src, [zIndex = 3333]) => Void
 > Use it as a function to view a image.
@@ -59,27 +59,30 @@ ReactDOM.render(<Demo />, moundNode);
 > `src (String)`: The src of image.  
 > `[zIndex] (Number)`: The css `z-index`, default `3333`.
 * example
+```bash
+# function depend on `react-dom`, so it do not support `ssr`
+npm i --save-dev react-dom
+```
 ```js
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-import ImageViewer from '@mebtte/react-image-viewer';
+import view from '@mebtte/react-image-viewer/view';
 
 const src = 'https://mebtte.com/resource/wallpaper';
 
 class Demo extends React.Component {
-  view = () => ImageViewer.view(src)
+  viewImage = () => view(src)
 
   render() {
     return (
-      <button type="button" onClick={this.view}>
+      <button type="button" onClick={this.viewImage}>
         open
       </button>
     );
   }
 }
 
-ReactDOM.render(<Demo />, moundNode);
+export default Demo;
 ```
 
 ## Props

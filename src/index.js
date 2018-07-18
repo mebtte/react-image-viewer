@@ -5,7 +5,6 @@ import Aux from 'react-aux';
 
 import style from './index.css';
 import { LOAD_STATUS, WIDTH_STEP, MIN_SCLAE, TRANSITION_TIME } from './constant';
-import view from './util/view';
 
 import CloseButton from './component/CloseButton';
 import LoadError from './component/LoadError';
@@ -29,8 +28,6 @@ class ImageViewer extends React.Component {
   static defaultProps = {
     zIndex: 3333,
   }
-
-  static view = view
 
   constructor(props) {
     super(props);

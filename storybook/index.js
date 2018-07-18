@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import ImageViewer from '../src/index.js';
+import view from '../src/view.js';
 
 const src = 'https://mebtte.com/resource/wallpaper';
 
@@ -35,7 +36,7 @@ class ComponentDemo extends React.Component {
 }
 
 class FunctionDemo extends React.Component {
-  view = () => ImageViewer.view(src)
+  view = () => view(src)
 
   render() {
     return (

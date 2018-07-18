@@ -12,6 +12,14 @@ npm install --save react prop-types
 npm install --save @mebtte/react-image-viewer
 ```
 
+## Props
+| name | type | required | default | description |
+| --- | --- | --- | --- | --- |
+| open | Boolean | true | | Visibility. |
+| src | String | true | | The src of image. |
+| onClose | Function | true | | The close event handler. |
+| zIndex | Number | false | 3333 | The z-index css. |
+
 ## Usage
 ### As Component
 ```js
@@ -60,8 +68,8 @@ export default Demo;
 > `[zIndex] (Number)`: The css `z-index`, default `3333`.
 * example
 ```bash
-# function depend on `react-dom`, so it do not support `ssr`
-npm i --save-dev react-dom
+# function depend on `react-dom`
+npm install --save-dev react-dom
 ```
 ```js
 import React from 'react';
@@ -84,11 +92,3 @@ class Demo extends React.Component {
 
 export default Demo;
 ```
-
-## Props
-| name | type | required | default | description |
-| --- | --- | --- | --- | --- |
-| open | Boolean | true | | Visibility. |
-| src | String | true | | The src of image. |
-| onClose | Function | true | | The close event handler. |
-| zIndex | Number | false | 3333 | The z-index css. |

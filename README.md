@@ -1,5 +1,5 @@
 # react-image-viewer
-React Component that view a image. [See it online](https://mebtte.github.io/react-image-viewer/example).
+React Component that view a image. [See it online](https://mebtte.github.io/react-image-viewer/example).
 
 ![](./example/screenshot.png)
 
@@ -69,7 +69,7 @@ export default Demo;
 * example
 ```bash
 # function depend on `react-dom`
-npm install --save-dev react-dom
+npm install --save react-dom
 ```
 ```js
 import React from 'react';
